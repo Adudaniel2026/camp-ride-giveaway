@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAMP RIDE GIVEAWAY – UMAT</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header><p class="eyebrow">UNIVERSITY OF MINES AND TECHNOLOGY</p><h1>CAMP RIDE GIVEAWAY</h1><p class="sub">UMAT Student Registration</p></header>
+    <section class="panel">
+      <div id="menu">
+        <p class="welcome">Welcome to CAMP RIDE GIVEAWAY.</p>
+        <p>Would you like to participate?</p>
+        <button id="accept">1. Accept / Participate</button>
+        <button id="cancel" class="secondary">0. Cancel</button>
+      </div>
+      <form id="registration" hidden>
+        <h2>Participant registration</h2>
+        <label>Full name<input name="fullName" required maxlength="100" autocomplete="name"></label>
+        <label>Student ID<input name="studentId" required maxlength="30"></label>
+        <label>Phone number<input name="phone" required placeholder="0241234567" inputmode="tel"></label>
+        <label class="consent"><input name="consent" type="checkbox" required> I agree to provide these details for this giveaway registration.</label>
+        <button type="submit">Submit registration</button>
+        <button type="button" id="back" class="secondary">Back</button>
+      </form>
+      <div id="message" role="status" aria-live="polite"></div>
+    </section>
+    <details class="admin">
+      <summary>Administrator</summary>
+      <form id="login">
+        <label>Admin password<input name="password" type="password" required></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <div id="dashboard" hidden>
+        <h2>Registration dashboard</h2>
+        <p>Total registrations: <strong id="total">0</strong></p>
+        <button id="refresh" type="button">Refresh list</button>
+        <a class="button" href="/api/admin/export.csv">Export CSV</a>
+        <button id="logout" class="secondary" type="button">Sign out</button>
+        <div class="table-wrap"><table><thead><tr><th>Name</th><th>Student ID</th><th>Phone</th><th>Date</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </div>
+    </details>
+    <footer>Demo registration website. A real mobile-network USSD shortcode requires a USSD service provider.</footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

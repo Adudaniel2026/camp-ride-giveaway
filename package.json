@@ -1,0 +1,20 @@
+{
+  "name": "camp_ride_giveaway_umat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adudaniel2026/camp-ride-giveaway.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adudaniel2026/camp-ride-giveaway/issues"
+  },
+  "homepage": "https://github.com/Adudaniel2026/camp-ride-giveaway#readme"
+}

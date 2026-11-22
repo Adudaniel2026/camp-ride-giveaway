@@ -35,13 +35,15 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS registrations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
-    student_id TEXT NOT NULL UNIQUE,
     phone TEXT NOT NULL,
+    index_number TEXT,
+    students_email TEXT,
+    password TEXT,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   )
 `);
 
-const passwordHash = bcrypt.hashSync(adminPassword, 12);
+const passwordHash = bcrypt.hashSync(adminPassword, 10);
 app.use(helmet());
 app.use(express.json({ limit: '20kb' }));
 app.use(session({
@@ -77,8 +79,10 @@ app.get('/api/config', (req, res) => res.json({ csrfToken: csrfToken(req) }));
 
 app.post('/api/register', registerLimiter, (req, res) => {
   const fullName = String(req.body.fullName || '').trim();
-  const studentId = String(req.body.studentId || '').trim().toUpperCase();
-  const phone = String(req.body.phone || '').trim().replace(/[()\s-]/g, '');
+  const phone = String(req.body.phone || '').trim().toUpperCase();
+  const indexNumber = String(req.body.indexnumber || '').trim().replace(/[()\s-]/g, '');
+  const studentEmail = String(req.body.studentEmail || '').trim();
+  const password = String(req.body.password|| '').trim();
   const consent = req.body.consent === true;
 
   if (!consent) return res.status(400).json({ error: 'Please confirm that you agree to the registration notice.' });
@@ -87,8 +91,22 @@ app.post('/api/register', registerLimiter, (req, res) => {
   if (!/^(\+233|0)\d{9}$/.test(phone)) return res.status(400).json({ error: 'Enter a Ghanaian phone number, e.g. 0241234567 or +233241234567.' });
 
   try {
-    const result = db.prepare('INSERT INTO registrations (full_name, student_id, phone) VALUES (?, ?, ?)')
-      .run(fullName, studentId, phone);
+ const result = db.prepare(`
+  INSERT INTO registrations (
+    full_name,
+    phone,
+    index_number,
+    students_email,
+    password
+  )
+  VALUES (?, ?, ?, ?, ?)
+`).run(
+  fullName,
+  phone,
+  indexNumber,
+  studentEmail,
+  hashedPassword
+);
     res.status(201).json({ message: 'Registration received. Thank you for participating!', id: result.lastInsertRowid });
   } catch (err) {
     if (String(err.code).includes('SQLITE_CONSTRAINT')) return res.status(409).json({ error: 'This student ID has already been registered.' });

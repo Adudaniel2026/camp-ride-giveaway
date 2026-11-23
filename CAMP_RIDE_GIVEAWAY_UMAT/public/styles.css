@@ -1,7 +1,10 @@
 :root {
-    --white: #FFFFFF;
-    --gold: #D4AF37;
+    --gold: #f5b800;
+    --dark: #292b38;
     --white:#FFFFFF;
+    --light-grey: #f1f2f3;
+    --muted-grey: #858b98;
+    --black: #17181d;
 }
 
 * {
@@ -12,9 +15,9 @@ body {
     margin: 0;
     padding: 25px;
     font-family: Arial, sans-serif;
-    background: var(--white);
-    color: var(--white);
-}
+    background: var(--light_grey);
+    color: var(--dark);
+}  
 
 .shell {
     max-width: 650px;
@@ -24,16 +27,18 @@ body {
 header {
     text-align: center;
     color: var(--gold);
+    backgroud: var(--dark);
     font-weight: bold;
     padding: 15px;
+    boarder-radius: 12px;
 }
 
 .panel {
     background: var(--white);
-    color: var(--white);
+    color: var(--dark);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3 {
